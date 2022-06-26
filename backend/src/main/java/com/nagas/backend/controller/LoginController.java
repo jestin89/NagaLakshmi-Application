@@ -1,6 +1,8 @@
 package com.nagas.backend.controller;
 
 import com.nagas.backend.model.LoginRequest;
+import com.nagas.backend.model.LoginResponse;
+import com.nagas.backend.model.Register;
 import com.nagas.backend.services.RegisterService;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
@@ -23,18 +25,18 @@ public class LoginController {
     }
 
     @PostMapping({"/login"})
-    public String loginValidation(@RequestBody LoginRequest request) {
+    public LoginResponse loginValidation(@RequestBody LoginRequest request) {
         log.info("Entering the login validation method:" + request.getUserName());
-        String role = null;
+        LoginResponse loginDetails = null;
 
         try {
-            role = this.registerService.validate(request);
+            loginDetails = registerService.validate(request);
         } catch (Exception var4) {
             log.info("Exception in login validation:" + var4);
         }
 
         log.info("Leaving the login validation method");
-        return role;
+        return loginDetails;
     }
 }
 

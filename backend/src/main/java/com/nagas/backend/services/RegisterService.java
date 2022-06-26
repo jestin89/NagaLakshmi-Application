@@ -3,9 +3,11 @@ package com.nagas.backend.services;
 import com.nagas.backend.entity.EmailTemplate;
 import com.nagas.backend.entity.UserRegister;
 import com.nagas.backend.model.LoginRequest;
+import com.nagas.backend.model.LoginResponse;
 import com.nagas.backend.model.Register;
 import com.nagas.backend.repository.EmailTemplateRepository;
 import com.nagas.backend.repository.RegisterRepository;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
@@ -23,41 +25,33 @@ public class RegisterService {
     private RegisterRepository registerRepository;
     @Autowired
     private EmailTemplateRepository emailTemplateRepository;
+
     @Autowired
     private EmailService emailService;
 
-    public RegisterService() {
-    }
+
 
     public Register saveUserRegister(Register register) {
         String templateName = "application_request";
-        new Register();
+        Register result = new Register();
         Map<String, Object> valueMap = new HashMap();
         UserRegister user = this.convertToUserRegister(register);
-        Register result = this.convertToRegister((UserRegister)this.registerRepository.save(user));
+        result = this.convertToRegister((UserRegister) this.registerRepository.save(user));
         EmailTemplate emailTemplate = this.emailTemplateRepository.findByTemplateName(templateName);
-        if (register != null && !StringUtils.isEmpty(result.getRole()) && !result.getRole().equalsIgnoreCase("admin")) {
-            if (result.getRole().equalsIgnoreCase("subscribers")) {
-                StringJoiner join = new StringJoiner(",");
-                if (emailTemplate != null) {
-                    join.add(emailTemplate.getTo());
-                }
 
-                if (!StringUtils.isEmpty(result.getEmailId())) {
-                    join.add(result.getEmailId());
-                }
-
-                System.err.println("Subscriber:" + join.toString());
-            } else if (result.getRole().equalsIgnoreCase("student")) {
-                try {
-                    if (!result.getUserName().isEmpty()) {
-                        valueMap.put("requestApplication", result);
-                        this.emailService.sendMail(emailTemplate, valueMap);
-                    }
-                } catch (Exception var8) {
-                    log.info("Exception in saveUserRegister:", var8);
-                }
+        if (result != null && result.getRole().equalsIgnoreCase("subscribers")) {
+            StringJoiner join = new StringJoiner(",");
+            if (emailTemplate != null) {
+                join.add(emailTemplate.getTo());
             }
+
+            if (!StringUtils.isEmpty(result.getEmailId())) {
+                join.add(result.getEmailId());
+            }
+
+            System.err.println("Subscriber:" + join.toString());
+            emailTemplate.setTo(join.toString());
+            emailTemplateRepository.save(emailTemplate);
         }
 
         return result;
@@ -86,8 +80,9 @@ public class RegisterService {
         return user;
     }
 
-    public String validate(LoginRequest request) {
+    public LoginResponse validate(LoginRequest request) {
         log.info("Entering the validate method");
+        LoginResponse response = new LoginResponse();
         StringJoiner joiner = new StringJoiner(",");
 
         try {
@@ -100,24 +95,33 @@ public class RegisterService {
                                 if (request.getPassword().equalsIgnoreCase(userValidate.getPassword())) {
                                     if (!StringUtils.isEmpty(userValidate.getRole())) {
                                         joiner.add(userValidate.getRole());
+                                        response.setId(userValidate.getId());
+                                        response.setEmailId(userValidate.getEmailId());
+                                        response.setMobileNo(userValidate.getMobileNo());
+                                        response.setRole(userValidate.getRole());
+                                        response.setStatus("success");
                                     }
                                 } else {
                                     joiner.add("Invalid Password");
+                                    response.setStatus("error");
                                 }
                             }
                         } else {
                             joiner.add("Invalid UserName");
+                            response.setStatus("error");
                         }
                     }
                 } else {
                     joiner.add("Invalid UserName");
+                    response.setStatus("error");
                 }
+                response.setMessage(joiner.toString());
             }
         } catch (Exception var4) {
             log.info("Exception in Validate:" + var4);
         }
 
         log.info("Leaving the validate method");
-        return joiner.toString();
+        return response;
     }
 }

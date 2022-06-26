@@ -28,8 +28,8 @@ public class RegisterController {
         try {
             result = this.service.saveUserRegister(register);
             System.err.println("REGISter id:" + result.getUserName());
-        } catch (Exception var4) {
-            log.info("Exception in userRegister method:" + var4.getMessage());
+        } catch (Exception e) {
+            log.info("Exception in userRegister method:" + e.getMessage());
         }
 
         log.info("Leaving the userRegister method");
