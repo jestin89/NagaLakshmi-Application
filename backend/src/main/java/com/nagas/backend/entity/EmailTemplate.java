@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @NoArgsConstructor
 @Entity
 @Table(
-        name = "EmailTemplate"
+        name = "email_template"
 )
 public class EmailTemplate {
     @Id
