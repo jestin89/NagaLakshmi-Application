@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+.adminViewWrap {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;  
+    padding: 28px 15px;  
+}
+.adminViewWrap h4 {
+    color: #80d6a3;
+    text-align: center;
+    padding: 5px 5px 15px 5px;
+}
+.admin_outer {
+    margin: 0 auto;
+    width: 90%;
+}

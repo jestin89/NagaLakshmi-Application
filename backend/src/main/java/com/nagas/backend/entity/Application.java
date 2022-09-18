@@ -18,14 +18,14 @@ public class Application {
 
     private int id;
 
-    @Column(name = "first_name")
-    private String firstName;
+    @Column(name = "studentName")
+    private String studentName;
 
-    @Column(name = "last_name")
-    private String lastName;
+    @Column(name = "registerNo")
+    private String registerNo;
 
-    @Column(name = "gender")
-    private String gender;
+    @Column(name = "education")
+    private String education;
 
     @Column(name = "mobileno")
     private int mobileNo;
@@ -33,26 +33,14 @@ public class Application {
     @Column(name = "mailid")
     private String emailId;
 
-    @Column(name = "education_type")
-    private String educationType;
+    @Column(name = "instituteName")
+    private String instituteName;
 
-    @Column(name = "college_name")
-    private String collegeName;
+    @Column(name = "course")
+    private String course;
 
-    @Column(name = "college_code")
-    private String collegeCode;
-
-    @Column(name = "college_details")
-    private String collegeDetails;
-
-    @Column(name = "school_name")
-    private String schoolName;
-
-    @Column(name = "school_code")
-    private String schoolCode;
-
-    @Column(name = "school_details")
-    private String schoolDetails;
+    @Column(name = "department")
+    private String department;
 
     @Column(name = "created")
     @Temporal(TemporalType.TIMESTAMP)

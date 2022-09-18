@@ -1,1 +1,59 @@
-<p>register works!</p>
+<div class="login_Register formWrapper">
+  <div class="form form_outer">
+    <form class="form-part" [formGroup]="registerForm" (submit)="register()">
+      <h4>REGISTER</h4>
+      <div class="">
+        <input type="text" placeholder="Name" formControlName="userName"
+          [ngClass]="{ 'is-invalid': submitted && f.userName.errors }" />
+        <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+          <div *ngIf="f.userName.errors.required">Name is required</div>
+        </div>
+      </div>
+      <div class="">
+        <input type="password" placeholder="Password" formControlName="password"
+          [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+        <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+          <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+      </div>
+      <div class="">
+        <input type="password" placeholder="Confirm password" formControlName="confirmPassword"
+          [ngClass]="{ 'is-invalid': submitted && f.confirmPassword.errors }" />
+        <div *ngIf="submitted && f.confirmPassword.errors" class="invalid-feedback">
+          <div *ngIf="f.confirmPassword.errors.required">Confirm Password is required</div>
+        </div>
+      </div>
+      <div class="">
+        <select class="" placeholder="Choose Student/Subscriber" formControlName="role"
+          [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
+          <option value=""></option>
+          <option value="Student">Student</option>
+          <option value="Subscriber">Subscriber</option>
+        </select>
+        <div *ngIf="submitted && f.role.errors" class="invalid-feedback">
+          <div *ngIf="f.role.errors.required">Role is required</div>
+        </div>
+      </div>
+      <div class="">
+        <input type="text" placeholder="Email" formControlName="emailId"
+          [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" />
+        <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+          <div *ngIf="f.emailId.errors.required">Email is required</div>
+          <div *ngIf="f.emailId.errors.email">Email must be a valid email address</div>
+        </div>
+      </div>
+      <div class="">
+        <input type="text" placeholder="Phone Number" formControlName="mobileNo"
+          [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+        <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+          <div *ngIf="f.mobileNo.errors.required">Mobile No is required</div>
+        </div>
+      </div>
+
+      <button>SUBMIT</button>
+      <div class="forget_signupPart">
+        <p>Already have an account? <a routerLink="/login" href="#" class="signUP_txt">LOGIN</a></p>
+      </div>
+    </form>
+  </div>
+</div>

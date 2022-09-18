@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 
 @Slf4j
 @Service
@@ -37,9 +39,9 @@ public class RegisterService {
         Map<String, Object> valueMap = new HashMap();
         UserRegister user = this.convertToUserRegister(register);
         result = this.convertToRegister((UserRegister) this.registerRepository.save(user));
-        EmailTemplate emailTemplate = this.emailTemplateRepository.findByTemplateName(templateName);
 
         if (result != null && result.getRole().equalsIgnoreCase("subscribers")) {
+            EmailTemplate emailTemplate = this.emailTemplateRepository.findByTemplateName(templateName);
             StringJoiner join = new StringJoiner(",");
             if (emailTemplate != null) {
                 join.add(emailTemplate.getTo());
@@ -87,10 +89,10 @@ public class RegisterService {
 
         try {
             if (!StringUtils.isEmpty(request.getUserName())) {
-                UserRegister userValidate = this.registerRepository.findByUserName(request.getUserName());
+                UserRegister userValidate = this.registerRepository.findByEmailId(request.getUserName());
                 if (userValidate != null) {
-                    if (!StringUtils.isEmpty(userValidate.getUserName())) {
-                        if (request.getUserName().equalsIgnoreCase(userValidate.getUserName())) {
+                    if (!StringUtils.isEmpty(userValidate.getEmailId())) {
+                        if (request.getUserName().equalsIgnoreCase(userValidate.getEmailId())) {
                             if (!StringUtils.isEmpty(userValidate.getPassword())) {
                                 if (request.getPassword().equalsIgnoreCase(userValidate.getPassword())) {
                                     if (!StringUtils.isEmpty(userValidate.getRole())) {

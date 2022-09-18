@@ -14,6 +14,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginService } from './services/login.service';
 import { StudentApplicationService } from './services/student-application.service';
 import {HttpClientModule} from '@angular/common/http';
+import { SubscriberDashboardComponent } from './component/subscriber-dashboard/subscriber-dashboard.component';
+import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
+import { StudentDashboardComponent } from './component/student-dashboard/student-dashboard.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +26,10 @@ import {HttpClientModule} from '@angular/common/http';
     LayoutComponent,
     LandingPageComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    SubscriberDashboardComponent,
+    AdminDashboardComponent,
+    StudentDashboardComponent
   ],
   imports: [
     BrowserModule,

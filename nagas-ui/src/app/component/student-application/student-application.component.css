@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+.studentDetailWrap {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;  
+    padding: 28px 15px;  
+}
+.studentDetailWrap h4 {
+    color: #80d6a3;
+    text-align: center;
+    padding: 5px 5px 15px 5px;
+}
+.st_outer {
+    display: flex;
+    justify-content: center;
+}

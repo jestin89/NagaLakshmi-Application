@@ -1,1 +1,28 @@
-<p>login works!</p>
+<div class="login_Register formWrapper">
+    <div class="form form_outer">
+      <form class="form-part" [formGroup]="loginForm" (submit)="login()">
+        <h4>LOGIN</h4>
+        <div class="">
+          <input type="text" placeholder="email" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"/>
+          <div *ngIf="submitted && f.userName.errors" class="invalid-feedback">
+            <div *ngIf="f.userName.errors.required">UserName is required</div>
+            <div *ngIf="f.userName.errors.email">UserName must be a valid email address</div>
+        </div>
+        </div>
+        <div class="">
+          <input type="password" placeholder="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }"  />
+          <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+        </div>
+        </div> 
+        <!-- <div class="term_condtionPart">
+          <p><span></span> Terms & Condition</p>
+        </div>             -->        
+        <button>login</button>
+        <div class="forget_signupPart">
+          <p><a href="#" class="ForgerTxt">Forget Password?</a></p>
+          <p>Need an account? <a routerLink="/register" href="#" class="signUP_txt">SIGN UP</a></p> 
+        </div>        
+      </form>  
+    </div>
+</div>

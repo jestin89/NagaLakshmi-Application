@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+body {
+  background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+}
+.forget_signupPart {
+  margin-top: 10px;
+}
+.signUP_txt, .ForgerTxt {
+  text-decoration: underline !important;
+  color: #80d6a3;
+}
+.login_Register h4 {
+  color: #80d6a3;
+  padding: 0 0 0px 0;
+  position: relative;
+  top: -12px;
+}

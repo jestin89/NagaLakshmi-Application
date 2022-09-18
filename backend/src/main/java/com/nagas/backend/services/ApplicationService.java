@@ -72,9 +72,8 @@ public class ApplicationService {
         Map<String, Object> valueMap = new HashMap();
         Response result = new Response();
         result.setApplicationId(mail.getUser().getId());
-        result.setFirstName(mail.getFirstName());
-        result.setLastName(mail.getLastName());
-        result.setEducationType(mail.getEducationType());
+        result.setStudentName(mail.getStudentName());
+        result.setEducationType(mail.getEducation());
         result.setEmailId(mail.getEmailId());
         result.setMobileNo(mail.getMobileNo());
         EmailTemplate emailTemplate = emailTemplateRepository.findByTemplateName(templateName);
@@ -118,18 +117,14 @@ public class ApplicationService {
 
     private Application convertToEntity(ApplicationRequest request, UserRegister user) {
         Application application = new Application();
-        application.setFirstName(request.getFirstName());
-        application.setLastName(request.getLastName());
-        application.setGender(request.getGender());
+        application.setStudentName(request.getStudentName());
+        application.setRegisterNo(request.getRegisterNo());
+        application.setEducation(request.getEducation());
         application.setMobileNo(request.getMobileNo());
         application.setEmailId(request.getEmailId());
-        application.setEducationType(request.getEducationType());
-        application.setCollegeName(request.getCollegeName());
-        application.setCollegeCode(request.getCollegeCode());
-        application.setCollegeDetails(request.getCollegeDetails());
-        application.setSchoolName(request.getSchoolName());
-        application.setSchoolCode(request.getSchoolCode());
-        application.setSchoolDetails(request.getSchoolDetails());
+        application.setInstituteName(request.getInstituteName());
+        application.setCourse(request.getCourse());
+        application.setDepartment(request.getDepartment());
         application.setUser(user);
         return application;
     }

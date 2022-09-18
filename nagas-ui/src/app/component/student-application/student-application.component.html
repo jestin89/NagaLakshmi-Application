@@ -1,1 +1,159 @@
-<p>student-application works!</p>
+<div class="container">
+    <div class="studentDetailWrap">
+        <div class="img-logo-details">
+            <img src="assets/img/Capture.PNG" alt="" class="">
+        </div>
+        <form [formGroup]="studentForm" (submit)="register()">
+            <h4>STUDENT APPLICATION</h4>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="st_outer form-style">
+                        <div class="st_info">
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="studentName">Student Name*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="input-style" id="studentName"
+                                            formControlName="studentName"
+                                            [ngClass]="{ 'is-invalid': submitted && f.studentName.errors }" />
+                                        <div *ngIf="submitted && f.studentName.errors" class="invalid-feedback">
+                                            <div *ngIf="f.studentName.errors.required">StudentName is required</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="regNum">Register Number*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="input-style" id="regNum" formControlName="registerNo"
+                                        [ngClass]="{ 'is-invalid': submitted && f.registerNo.errors }" />
+                                      <div *ngIf="submitted && f.registerNo.errors" class="invalid-feedback">
+                                        <div *ngIf="f.registerNo.errors.required">RegisterNo is required</div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="education">Education*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <select class="input-style" id="education"  formControlName="education"
+                                            [ngClass]="{ 'is-invalid': submitted && f.education.errors }">
+                                                <option value="">Choose</option>
+                                                <option value="School">School</option>
+                                                <option value="College">College</option>
+                                            </select>
+                                            <div *ngIf="submitted && f.education.errors" class="invalid-feedback">
+                                                <div *ngIf="f.education.errors.required">Education is required</div>
+                                              </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="institute">Institute Name*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="input-style" id="institute" formControlName="instituteName"
+                                        [ngClass]="{ 'is-invalid': submitted && f.instituteName.errors }" />
+                                      <div *ngIf="submitted && f.instituteName.errors" class="invalid-feedback">
+                                        <div *ngIf="f.instituteName.errors.required">InstituteName is required</div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="course">Course*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="input-style" id="course" formControlName="course"
+                                        [ngClass]="{ 'is-invalid': submitted && f.course.errors }" />
+                                      <div *ngIf="submitted && f.course.errors" class="invalid-feedback">
+                                        <div *ngIf="f.course.errors.required">Course is required</div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="dept">Department*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="input-style" id="dept" formControlName="department"
+                                        [ngClass]="{ 'is-invalid': submitted && f.department.errors }" />
+                                      <div *ngIf="submitted && f.department.errors" class="invalid-feedback">
+                                        <div *ngIf="f.department.errors.required">Department is required</div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="mobile">Mobile Number*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="input-style" id="mobile" formControlName="mobileNo"
+                                        [ngClass]="{ 'is-invalid': submitted && f.mobileNo.errors }" />
+                                      <div *ngIf="submitted && f.mobileNo.errors" class="invalid-feedback">
+                                        <div *ngIf="f.mobileNo.errors.required">MobileNo is required</div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="email">Email*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="text" class="input-style" id="email" formControlName="emailId"
+                                        [ngClass]="{ 'is-invalid': submitted && f.emailId.errors }" />
+                                      <div *ngIf="submitted && f.emailId.errors" class="invalid-feedback">
+                                        <div *ngIf="f.emailId.errors.required">EmailId is required</div>
+                                        <div *ngIf="f.emailId.errors.email">Email must be a valid email address</div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group">
+                                    <div class="col-md-12">
+                                        <label for="bonofied">Bonafied*</label>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="file" class="upload" id="bonofied" name="bonafide" formControlName="bonafide"
+                                        [ngClass]="{ 'is-invalid': submitted && f.bonafide.errors }" />
+                                      <div *ngIf="submitted && f.bonafide.errors" class="invalid-feedback">
+                                        <div *ngIf="f.bonafide.errors.required">Bonafide is required</div>
+                                      </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="btn_wrap">
+                                <button class="btn-nagas btn-nagas_small">SAVE</button>
+                            </div>
+
+                        </div>
+                        <div class="st_infoTabel">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+.forget_signupPart {
+    margin-top: 10px;
+}
+.signUP_txt, .ForgerTxt {
+    text-decoration: underline !important;
+    color: #80d6a3;
+}
+.login_Register h4 {
+    color: #80d6a3;
+    padding: 0 0 0px 0;
+    position: relative;
+    top: -12px;
+}

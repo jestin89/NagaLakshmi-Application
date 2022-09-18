@@ -15,7 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
 @RestController
 @RequestMapping({"/nagas/api"})
@@ -24,17 +24,17 @@ public class ApplicationController {
     @Autowired
     private ApplicationService service;
 
-    @PostMapping(value= "/application/save",consumes={MediaType.APPLICATION_JSON_VALUE,MediaType.MULTIPART_FORM_DATA_VALUE})
-    public String saveApplication(@RequestPart("files") List<MultipartFile> files, @RequestPart("request") String application){
-        System.err.println("REquest:"+application);
-        ApplicationRequest request = new ApplicationRequest();
-        log.info("Entering the saveApplication method:"+request.getFirstName());
+    @PostMapping(value= "/application/save")
+    public String saveApplication(@RequestBody ApplicationRequest request){
+        System.err.println("REquest:"+request.getStudentName());
+
+        log.info("Entering the saveApplication method:"+request.getStudentName());
         String save = null;
         try{
-            ObjectMapper objectMapper = new ObjectMapper();
-            request = objectMapper.readValue(application,ApplicationRequest.class);
+//            ObjectMapper objectMapper = new ObjectMapper();
+           // request = objectMapper.readValue(request,ApplicationRequest.class);
             List<ApplicationAttachment> fileList = new ArrayList<ApplicationAttachment>();
-            for (MultipartFile file : files) {
+            MultipartFile file = request.getBonafide();
                 ApplicationAttachment attachment = new ApplicationAttachment();
                 String fileContentType = file.getContentType();
                 String sourceFileContent = new String(file.getBytes());
@@ -45,24 +45,24 @@ public class ApplicationController {
                 attachment.setFileType(fileContentType);
                 // Adding file into fileList
                 fileList.add(attachment);
-            }
+
             save   = service.saveApplication(request,fileList);
         }catch(Exception e){
             log.info("Exception in saveApplication:"+e);
         }
-        log.info("Leaving the saveApplication method:"+request.getFirstName());
+        log.info("Leaving the saveApplication method:"+request.getStudentName());
         return save;
     }
     @PostMapping("/application/update")
     public String updateApplication(@RequestBody ApplicationRequest request){
-        log.info("Entering the updateApplication method:"+request.getFirstName());
+        log.info("Entering the updateApplication method:"+request.getStudentName());
         String update = null;
         try{
             update   = service.updateApplication(request);
         }catch(Exception e){
             log.info("Exception in updateApplication:"+e);
         }
-        log.info("Leaving the updateApplication method:"+request.getFirstName());
+        log.info("Leaving the updateApplication method:"+request.getStudentName());
         return update;
 
     }
