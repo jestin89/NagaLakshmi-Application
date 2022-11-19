@@ -1,1 +1,70 @@
-<p>student-dashboard works!</p>
+
+
+<div class="container">
+    <div class="adminViewWrap">
+        <div class="img-logo-details">
+            <img src="assets/img/Capture.PNG" alt="" class="">
+        </div>
+        <h4>STUDENT DASHBOARD</h4>
+        <div class="row"> 
+            <div  *ngIf="studentEnable">
+                <button (click)="studentApplication()">Student Application</button>
+            </div>  
+            
+            <!--Student Details-->
+            <div class="col-md-12">
+                <div class="admin_outer form-style">                    
+                    <div class="st_info">                        
+                        <div class="row">
+                            <h5>Student Details:</h5>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>Student Name</th>
+                                            <th>Register No</th>
+                                            <th>Education</th>
+                                            <th>Institute Name</th>      
+                                            <th>Course</th>                                         
+                                            <th>Department</th>   
+                                            <th>Mobile No</th> 
+                                            <th>EmailId</th> 
+                                            <th>User Id</th> 
+                                            <th>Bonafide</th> 
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngIf="application==null">No record found</tr>
+                                        <tr>
+                                            <td>{{application.id}}</td>
+                                            <td>{{application.studentName}}</td>
+                                            <td>{{application.registerNo}}</td>
+                                            <td>{{application.education}}</td>
+                                            <td>{{application.instituteName}}</td>
+                                            <td>{{application.course}}</td>
+                                            <td>{{application.department}}</td>
+                                            <td>{{application.mobileNo}}</td>
+                                            <td>{{application.emailId}}</td>
+                                            <td>{{application.userId}}</td>   
+                                            <td><a>sample</a></td>                                          
+                                            <td><a>View</a></td>                                            
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>                               
+                        </div>                        
+                        
+                    </div>                    
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>
+
+
+

@@ -48,13 +48,13 @@ public class ApplicationService {
 
                 Application application = convertToEntity(request, user.get());
                 Application response = applicationRepository.save(application);
-                if (response != null) {
-
-                    for (ApplicationAttachment fileModal : fileList) {
-                        fileModal.setApplication(response);
-                        applicationAttachmentRepository.save(fileModal);
-                    }
-                }
+//                if (response != null) {
+//
+//                    for (ApplicationAttachment fileModal : fileList) {
+//                        fileModal.setApplication(response);
+//                        applicationAttachmentRepository.save(fileModal);
+//                    }
+//                }
                 save = "Application Saved Successfully.";
                 sendMailToSubscribers(response);
             }
@@ -138,4 +138,31 @@ public class ApplicationService {
     }
 
 
+    public List<ApplicationRequest> getAllApplication() {
+        List<ApplicationRequest> response = null;
+        List<Application> application = applicationRepository.findAll();
+        response = convertToResponse(application);
+        return response;
+
+    }
+
+    private List<ApplicationRequest> convertToResponse(List<Application> application) {
+        List<ApplicationRequest> app = new ArrayList<>();
+
+        application.stream().forEach(s -> {
+            ApplicationRequest response = new ApplicationRequest();
+            response.setId(s.getId());
+            response.setDepartment(s.getDepartment());
+            response.setCourse(s.getCourse());
+            response.setEducation(s.getEducation());
+            response.setInstituteName(s.getInstituteName());
+            response.setEmailId(s.getEmailId());
+            response.setUserId(s.getUser().getId());
+            response.setRegisterNo(s.getRegisterNo());
+            response.setInstituteName(s.getInstituteName());
+            response.setStudentName(s.getStudentName());
+            app.add(response);
+        });
+        return app;
+    }
 }

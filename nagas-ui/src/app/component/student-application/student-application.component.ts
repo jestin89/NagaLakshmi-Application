@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { ApplicationRequest } from 'src/app/model/applicationRequest';
 import { StudentApplicationService } from 'src/app/services/student-application.service';
 
 @Component({
@@ -10,12 +12,23 @@ import { StudentApplicationService } from 'src/app/services/student-application.
 export class StudentApplicationComponent implements OnInit {
   studentForm: FormGroup;
   submitted = false;
+  selectedFiles?: FileList;
+  currentFile?: File;
+  request = new ApplicationRequest();
+  sub: any;
+  id: number;
   constructor(
     private formBuilder: FormBuilder,
-    private service: StudentApplicationService
+    private service: StudentApplicationService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.sub = this.route.params.subscribe(params => {
+      this.id = params['id'];
+    });
+    console.log(this.id);
+
     this.createForm();
   }
 
@@ -30,14 +43,30 @@ export class StudentApplicationComponent implements OnInit {
       department: ['', Validators.required],
       mobileNo: ['', Validators.required],
       emailId: ['', [Validators.required, Validators.email]],
-      userId: [''],
-      bonafide: ['', Validators.required]
+      userId: [this.id]
     });
   }
 
-  register() {
+  // selectFile(event: any): void {
+  //   this.selectedFiles = event.target.files;
+  // }
+
+  saveStudentApplication() {
+    // if (this.selectedFiles) {
+    //   const file: File | null = this.selectedFiles.item(0);
+
+    //   if (file) {
+    //     this.currentFile = file;
+    //     const formData: FormData = new FormData();
+    //     formData.append('file', file);
+    //     this.request.bonafide = formData;
+    //   }
+    // }
     this.submitted = true;
     if (this.studentForm.valid) {
+      this.request = this.studentForm.value;
+      console.log('the request:', this.request);
+
       console.log('studentForm:', this.studentForm.value);
       this.service.register(this.studentForm.value).subscribe((data: any) => {
         console.log('Response:', data);

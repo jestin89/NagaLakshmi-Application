@@ -23,16 +23,18 @@ public class RegisterController {
     public String userRegister(@RequestBody Register register) {
         log.info("Entering the userRegister method:" + register.getUserName());
         Register result = null;
-
+        String response = null;
         try {
             result = this.service.saveUserRegister(register);
             System.err.println("REGISter id:" + result.getUserName());
+            response = result.getUserName() + " saved successfully";
+            System.err.println("Response:"+response);
         } catch (Exception e) {
             log.info("Exception in userRegister method:" + e.getMessage());
         }
 
         log.info("Leaving the userRegister method");
-        return result.getUserName() + " saved successfully";
+        return "saved successfully";
     }
 }
 

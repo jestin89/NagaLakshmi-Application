@@ -35,9 +35,14 @@ export class LoginComponent implements OnInit {
       console.log('LoginForm:', this.loginForm.value);
       this.service.login(this.loginForm.value).subscribe((data: LoginResponse) => {
         console.log('Response:', data);
+        console.log('Response:', data.id);
         if (data != null) {
-          if (data.role === 'Student') {
-            this.router.navigateByUrl('/studentDashboard');
+          if (data.role === 'Student') {            
+            this.router.navigateByUrl(`/studentDashboard/${data.id}`);    
+          }else if (data.role === 'Subscriber') {
+            this.router.navigateByUrl('/subscriberDashboard');
+          }else if (data.role === 'Admin') {
+            this.router.navigateByUrl('/adminDashboard');
           }
         }
       }, (error) => {

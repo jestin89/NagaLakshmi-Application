@@ -34,17 +34,17 @@ public class ApplicationController {
 //            ObjectMapper objectMapper = new ObjectMapper();
            // request = objectMapper.readValue(request,ApplicationRequest.class);
             List<ApplicationAttachment> fileList = new ArrayList<ApplicationAttachment>();
-            MultipartFile file = request.getBonafide();
-                ApplicationAttachment attachment = new ApplicationAttachment();
-                String fileContentType = file.getContentType();
-                String sourceFileContent = new String(file.getBytes());
-                String fileName = file.getOriginalFilename();
-               // FileModal fileModal = new FileModal(fileName, sourceFileContent, fileContentType);
-                attachment.setFileName(fileName);
-                attachment.setContent(file.getBytes());
-                attachment.setFileType(fileContentType);
-                // Adding file into fileList
-                fileList.add(attachment);
+//            MultipartFile file = request.getBonafide();
+//                ApplicationAttachment attachment = new ApplicationAttachment();
+//                String fileContentType = file.getContentType();
+//                String sourceFileContent = new String(file.getBytes());
+//                String fileName = file.getOriginalFilename();
+//               // FileModal fileModal = new FileModal(fileName, sourceFileContent, fileContentType);
+//                attachment.setFileName(fileName);
+//                attachment.setContent(file.getBytes());
+//                attachment.setFileType(fileContentType);
+//                // Adding file into fileList
+//                fileList.add(attachment);
 
             save   = service.saveApplication(request,fileList);
         }catch(Exception e){
@@ -79,6 +79,19 @@ public class ApplicationController {
 
        log.info("Leaving the getApplicationDetails method");
        return response;
+    }
+
+    @GetMapping("/application/getAllStudentDetails")
+    public List<ApplicationRequest> getAllStudentDetails(){
+        log.info("Entering the getAllStudentDetails methods");
+        List<ApplicationRequest> response = null;
+        try{
+            response = service.getAllApplication();
+        }catch(Exception e){
+            log.info("Exception in getAllStudentDetails method:"+e.getMessage());
+        }
+        log.info("Leaving the getAllStudentDetails methods");
+        return response;
     }
 
 }

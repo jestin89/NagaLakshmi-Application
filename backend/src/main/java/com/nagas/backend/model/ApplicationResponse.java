@@ -7,5 +7,5 @@ import java.util.List;
 @Data
 public class ApplicationResponse {
     private ApplicationRequest request;
-    private List<AttachedResponse> attachedResponse;
+    //private List<AttachedResponse> attachedResponse;
 }

@@ -5,7 +5,6 @@
         </div>
         <h4>ADMIN DASHBOARD</h4>
         <div class="row">
-            <!--Subscriber Details-->
             <div class="col-md-12">
                 <div class="admin_outer form-style">                    
                     <div class="st_info">                        
@@ -15,56 +14,37 @@
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>S.No</th>
-                                            <th>SubscriberName</th>
-                                            <th>Email</th>
-                                            <th>Student ID</th>
-                                            <th>View Deatails</th>                                            
+                                            <th>Id</th>
+                                            <th>Student Name</th>
+                                            <th>Register No</th>
+                                            <th>Education</th>
+                                            <th>Institute Name</th>      
+                                            <th>Course</th>                                         
+                                            <th>Department</th>   
+                                            <th>Mobile No</th> 
+                                            <th>EmailId</th> 
+                                            <th>User Id</th> 
+                                            <th>Bonafide</th> 
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>xxxxx</td>
-                                            <td>abcd@gmail.com</td>
-                                            <td>123456</td>
+                                        <tr *ngIf="student.length == 0">No record found.</tr>
+                                        <tr *ngFor="let application of student">
+                                            <td>{{application.id}}</td>
+                                            <td>{{application.studentName}}</td>
+                                            <td>{{application.registerNo}}</td>
+                                            <td>{{application.education}}</td>
+                                            <td>{{application.instituteName}}</td>
+                                            <td>{{application.course}}</td>
+                                            <td>{{application.department}}</td>
+                                            <td>{{application.mobileNo}}</td>
+                                            <td>{{application.emailId}}</td>
+                                            <td>{{application.userId}}</td>   
+                                            <td><a>sample</a></td>                                          
                                             <td><a>View</a></td>                                            
                                         </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>yyyy</td>
-                                            <td>sdfsfd@gmail.com</td>
-                                            <td>098876</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>zzzzz</td>
-                                            <td>ram@gmail.com</td>
-                                            <td>676778</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Mahi</td>
-                                            <td>mahid@gmail.com</td>
-                                            <td>567432</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Prakash</td>
-                                            <td>prashaks@gmail.com</td>
-                                            <td>834687</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Guru</td>
-                                            <td>abcd@gmail.com</td>
-                                            <td>789910</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
+                                        
                                     </tbody>
                                 </table>
                             </div>                               
@@ -74,74 +54,7 @@
                 </div>
             </div>
 
-            <!--Student Details-->
-            <div class="col-md-12">
-                <div class="admin_outer form-style">                    
-                    <div class="st_info">                        
-                        <div class="row">
-                            <h5>Student Details:</h5>
-                            <div class="table-responsive">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th>S.No</th>
-                                            <th>Student Name</th>
-                                            <th>Email</th>
-                                            <th>Student ID</th>
-                                            <th>View Deatails</th>                                            
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>1</td>
-                                            <td>Jhon</td>
-                                            <td>abcd@gmail.com</td>
-                                            <td>123456</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>Doe</td>
-                                            <td>sdfsfd@gmail.com</td>
-                                            <td>098876</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>3</td>
-                                            <td>Kumar</td>
-                                            <td>ram@gmail.com</td>
-                                            <td>676778</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>4</td>
-                                            <td>Mahi</td>
-                                            <td>mahid@gmail.com</td>
-                                            <td>567432</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>5</td>
-                                            <td>Prakash</td>
-                                            <td>prashaks@gmail.com</td>
-                                            <td>834687</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                        <tr>
-                                            <td>6</td>
-                                            <td>Guru</td>
-                                            <td>abcd@gmail.com</td>
-                                            <td>789910</td>
-                                            <td><a>View</a></td>                                            
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>                               
-                        </div>                        
-                        
-                    </div>                    
-                </div>
-            </div>
+            
 
         </div>
         

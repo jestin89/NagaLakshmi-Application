@@ -14,8 +14,6 @@ public class ApplicationRequest {
     private String department;
     private int mobileNo;
     private String emailId;
-    private String created;
-    private String update;
     private int userId;
-    private MultipartFile bonafide;
+   // private MultipartFile bonafide;
 }

@@ -3,7 +3,7 @@
         <div class="img-logo-details">
             <img src="assets/img/Capture.PNG" alt="" class="">
         </div>
-        <form [formGroup]="studentForm" (submit)="register()">
+        <form [formGroup]="studentForm" (submit)="saveStudentApplication()">
             <h4>STUDENT APPLICATION</h4>
             <div class="row">
                 <div class="col-md-12">
@@ -129,20 +129,20 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="form-group">
                                     <div class="col-md-12">
                                         <label for="bonofied">Bonafied*</label>
                                     </div>
                                     <div class="col-md-12">
-                                        <input type="file" class="upload" id="bonofied" name="bonafide" formControlName="bonafide"
+                                        <input type="file" class="upload" id="bonofied" name="bonafide"  
                                         [ngClass]="{ 'is-invalid': submitted && f.bonafide.errors }" />
                                       <div *ngIf="submitted && f.bonafide.errors" class="invalid-feedback">
                                         <div *ngIf="f.bonafide.errors.required">Bonafide is required</div>
                                       </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="btn_wrap">
                                 <button class="btn-nagas btn-nagas_small">SAVE</button>
                             </div>

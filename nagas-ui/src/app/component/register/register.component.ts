@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -12,7 +13,8 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   constructor(
     private formBuilder: FormBuilder,
-    private service: LoginService
+    private service: LoginService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,7 +28,7 @@ export class RegisterComponent implements OnInit {
       "password": ['', Validators.required],
       "confirmPassword": ['', Validators.required],
       "emailId": ['', [Validators.required, Validators.email]],
-      "mobileNo": ['', Validators.required],
+      "mobileNo": ['', [Validators.required]],
       "role": ['', Validators.required]
     });
   }
@@ -35,7 +37,7 @@ export class RegisterComponent implements OnInit {
     this.submitted = true;
     if (this.registerForm.valid) {
       console.log('registerForm:', this.registerForm.value);
-      this.service.register(this.registerForm.value).subscribe((data: any) => {
+      this.service.register(this.registerForm.value).subscribe((data: string) => {
         console.log('REsponse:', data);
       }, (error) => {
         console.log('error:', error);
@@ -48,5 +50,9 @@ export class RegisterComponent implements OnInit {
   onReset() {
     this.submitted = false;
     this.registerForm.reset();
+  }
+  ok(){
+   this.onReset();
+    this.router.navigateByUrl('/login');
   }
 }

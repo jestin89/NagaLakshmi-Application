@@ -19,7 +19,7 @@ const routes: Routes = [
     component: RegisterComponent,
   },
   {
-    path: 'studentapplication',
+    path: 'studentapplication/:id',
     component: StudentApplicationComponent,
   },
   {
@@ -31,7 +31,7 @@ const routes: Routes = [
     component: AdminDashboardComponent,
   },
   {
-    path: 'studentDashboard',
+    path: 'studentDashboard/:id',
     component:StudentDashboardComponent,
   },
   /*Temporary path end*/
@@ -48,9 +48,22 @@ const routes: Routes = [
         component: RegisterComponent,
       },
       {
-        path: 'studentapplication',
+        path: 'studentapplication/:id',
         component: StudentApplicationComponent,
       },
+      {
+        path: 'studentDashboard/:id',
+        component: StudentDashboardComponent,
+      },
+      {
+        path: 'subscriberDashboard',
+        component: SubscriberDashboardComponent,
+      },
+      {
+        path: 'adminDashboard',
+        component: AdminDashboardComponent,
+      }
+      
     ]
 
   }
