@@ -1,6 +1,9 @@
 <div class="login_Register formWrapper">
     <div class="form form_outer">
       <form class="form-part" [formGroup]="loginForm" (submit)="login()">
+        <div class="img-logo-details authWrap">
+          <img src="assets/img/Capture.PNG" alt="" class="">
+        </div>
         <h4>LOGIN</h4>
         <div class="">
           <input type="text" placeholder="email" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }"/>

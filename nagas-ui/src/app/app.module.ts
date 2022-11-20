@@ -17,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { SubscriberDashboardComponent } from './component/subscriber-dashboard/subscriber-dashboard.component';
 import { AdminDashboardComponent } from './component/admin-dashboard/admin-dashboard.component';
 import { StudentDashboardComponent } from './component/student-dashboard/student-dashboard.component';
+import { DialogMessageComponent } from './component/shared/dialog-message/dialog-message.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +30,8 @@ import { StudentDashboardComponent } from './component/student-dashboard/student
     HeaderComponent,
     SubscriberDashboardComponent,
     AdminDashboardComponent,
-    StudentDashboardComponent
+    StudentDashboardComponent,
+    DialogMessageComponent
   ],
   imports: [
     BrowserModule,

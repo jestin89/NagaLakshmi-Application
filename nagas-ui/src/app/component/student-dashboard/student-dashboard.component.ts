@@ -14,6 +14,7 @@ export class StudentDashboardComponent implements OnInit {
   id: number;
   application = new Application();
   studentEnable: boolean = false;
+  showTable:boolean = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -31,6 +32,7 @@ export class StudentDashboardComponent implements OnInit {
         console.log('REsponse:', response);
         if (response != null && response.request != null && response.request) {
           this.studentEnable = false;
+          this.showTable = true;
           this.application = response.request;
         }
       });
@@ -38,6 +40,6 @@ export class StudentDashboardComponent implements OnInit {
   }
 
   studentApplication() {
-    this.router.navigateByUrl(`/studentapplication/${this.id}`);
+    this.router.navigateByUrl(`/home/studentapplication/${this.id}`);
   }
 }

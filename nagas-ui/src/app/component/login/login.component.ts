@@ -38,11 +38,11 @@ export class LoginComponent implements OnInit {
         console.log('Response:', data.id);
         if (data != null) {
           if (data.role === 'Student') {            
-            this.router.navigateByUrl(`/studentDashboard/${data.id}`);    
+            this.router.navigateByUrl(`/home/studentDashboard/${data.id}`);    
           }else if (data.role === 'Subscriber') {
-            this.router.navigateByUrl('/subscriberDashboard');
+            this.router.navigateByUrl('/home/subscriberDashboard');
           }else if (data.role === 'Admin') {
-            this.router.navigateByUrl('/adminDashboard');
+            this.router.navigateByUrl('/home/adminDashboard');
           }
         }
       }, (error) => {

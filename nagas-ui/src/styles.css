@@ -9,6 +9,64 @@ body {
     background-color: #F2F2F2;
     height: 100vh;
 }
+.container.innerWrapAlign {
+  margin-top: 12%;
+}
+header {
+  box-shadow: 0 5px 15px rgb(0 0 0 / 50%);
+}
+footer {
+  position: fixed;
+  bottom: 0;
+  margin-top: 25px;
+  width: 100%;
+  padding: 15px 0 15px 0;
+}
+footer p {
+  padding: 5px 0;
+} 
+
+/* no record wrap start*/
+.no_recordsWrap {
+  text-align: center;
+  padding: 15px 15px 15px 15px;
+  min-height: 150px;
+  margin-top: 18px;
+}
+.no_recordsWrap h3 {
+  font-size: 32px;
+  opacity: 0.5;
+  font-weight: normal;
+}
+.no_recordsWrap .back_app_btn {
+  font-family: 'Comfortaa', cursive;
+  text-transform: uppercase;
+  outline: 0;
+  /* background: #4b6cb7; */
+  background: #80d6a3;
+  width: 100%;
+  border: 0;
+  border-radius: 5px;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+.bkBtn_wraps {
+  padding: 30px 0;
+}
+.img-logo-details.authWrap {
+  width: 60%;
+  margin: 0 auto;
+  position: relative;
+  top: -25px;
+  display: block;
+}
+.img-logo-details.authWrap img {
+  width: 100%;
+}
+/* no record wrap end*/
 
 /*Form style Start*/
 .form_outer {
@@ -21,6 +79,7 @@ body {
   padding: 45px;
   text-align: center;
   border: 1px solid #ddd;
+  width: 100%;
 }
 
 .form_outer input,
@@ -115,13 +174,13 @@ body {
 
 /*Login register part*/
 .login_Register.formWrapper {
-    width: 360px;   
-    margin: auto;
-    font-family: 'Comfortaa', cursive;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
+  width: 450px;
+  margin: auto;
+  font-family: 'Comfortaa', cursive;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;  
 }
 
 /*Image logo details start*/
@@ -129,6 +188,19 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    display: none;
 }
 
 /*Image logo details end*/
+
+/*table style start*/
+.admin_outer table thead {
+  margin: 0 auto;
+  width: 90%;
+  background: #31708f;
+  color: #fff;
+}
+.admin_outer table thead tr th {
+  font-weight: 500;
+}
+/*table style end*/

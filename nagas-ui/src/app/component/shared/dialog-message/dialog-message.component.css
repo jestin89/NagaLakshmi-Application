@@ -1,0 +1,34 @@
+.customModal .modal-dialog{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 625px;
+}
+.customModal .modal-dialog .modal-content {
+    width: 100%;
+    border: none;
+}
+.customModal .modal-dialog .modal-content .modal-header {
+    background: #31708f;
+    text-align: center;
+    color: #fff;
+    font-weight: 800;
+    border: none;
+    border-radius: 5px 5px 0 0;
+}
+.customModal .modal-dialog .modal-content .modal-header .modal-title {
+    font-size: 20px;
+}
+.customModal .modal-dialog .modal-content .modal-body p {
+    text-align: center;
+}
+.customModal .modal-dialog .modal-content .modal-footer {
+    text-align: center;
+    border: none;
+}
+.customModal .modal-dialog .modal-content .modal-footer .btn {
+    min-width: 125px;
+    background: #80d6a3;
+    color: #fff;
+}

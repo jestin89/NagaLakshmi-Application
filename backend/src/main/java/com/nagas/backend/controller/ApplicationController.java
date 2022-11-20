@@ -27,7 +27,6 @@ public class ApplicationController {
     @PostMapping(value= "/application/save")
     public String saveApplication(@RequestBody ApplicationRequest request){
         System.err.println("REquest:"+request.getStudentName());
-
         log.info("Entering the saveApplication method:"+request.getStudentName());
         String save = null;
         try{
@@ -67,7 +66,7 @@ public class ApplicationController {
 
     }
 
-   @GetMapping("/application/getbyuserid/{userId}")
+   @GetMapping("/application/getByUserId/{userId}")
     public ApplicationResponse getApplicationDetails(@PathVariable("userId") Integer id){
         log.info("Entering the getApplicationDetails method:"+id);
        ApplicationResponse response = null;
@@ -76,7 +75,6 @@ public class ApplicationController {
         }catch(Exception e){
             log.info("Exception in getApplicationDetails method:"+e.getMessage());
         }
-
        log.info("Leaving the getApplicationDetails method");
        return response;
     }
@@ -93,5 +91,4 @@ public class ApplicationController {
         log.info("Leaving the getAllStudentDetails methods");
         return response;
     }
-
 }

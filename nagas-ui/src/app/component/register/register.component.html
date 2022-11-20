@@ -1,6 +1,9 @@
-<div class="login_Register formWrapper">
+<div class="login_Register formWrapper reg_alignWrap">
   <div class="form form_outer">
     <form class="form-part" [formGroup]="registerForm" (submit)="register()">
+      <div class="img-logo-details authWrap">
+        <img src="assets/img/Capture.PNG" alt="" class="">
+      </div>
       <h4>REGISTER</h4>
       <div class="">
         <input type="text" placeholder="Name" formControlName="userName"
@@ -26,7 +29,7 @@
       <div class="">
         <select class="" placeholder="Choose Student/Subscriber" formControlName="role"
           [ngClass]="{ 'is-invalid': submitted && f.role.errors }">
-          <option value=""></option>
+          <option value="">Choose</option>
           <option value="Student">Student</option>
           <option value="Subscriber">Subscriber</option>
           <option value="Admin">Admin</option>

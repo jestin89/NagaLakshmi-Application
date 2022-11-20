@@ -13,3 +13,6 @@
     position: relative;
     top: -12px;
 }
+.login_Register.formWrapper.reg_alignWrap {
+    margin: 5% auto;
+}

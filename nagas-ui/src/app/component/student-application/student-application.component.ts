@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ApplicationRequest } from 'src/app/model/applicationRequest';
 import { StudentApplicationService } from 'src/app/services/student-application.service';
 
@@ -21,6 +21,7 @@ export class StudentApplicationComponent implements OnInit {
     private formBuilder: FormBuilder,
     private service: StudentApplicationService,
     private route: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -70,6 +71,9 @@ export class StudentApplicationComponent implements OnInit {
       console.log('studentForm:', this.studentForm.value);
       this.service.register(this.studentForm.value).subscribe((data: any) => {
         console.log('Response:', data);
+        if (data) {
+          this.router.navigateByUrl(`/studentDashboard/${this.id}`);
+        }
       }, (error) => {
         console.log('Error:', error);
       });

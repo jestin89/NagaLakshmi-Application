@@ -17,7 +17,7 @@ export class StudentApplicationService {
   }
 
   getStudentDetailsById(userId: number) {
-    return this.http.get(this.apiUrl + '/application/getbyuserid/' + userId)
+    return this.http.get(this.apiUrl + '/application/getByUserId/' + userId)
   }
 
   getAllStudentDetails() {
