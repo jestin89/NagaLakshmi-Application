@@ -6,9 +6,83 @@
         <h4>ADMIN DASHBOARD</h4>
         <div class="row">
             <div class="col-md-12">
-                <div class="admin_outer form-style">                    
-                    <div class="st_info">                        
-                        <div class="row">                            
+                <div class="admin_outer form-style">
+                    <div class="st_info">
+                        <div class="row">
+                            <p>Student Details:</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>UserName</th>
+                                            <th>EmailId</th>
+                                            <th>MobileNo</th>
+                                            <th>Role</th>                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr *ngIf="student.length == 0">No record found.</tr> -->
+                                        <tr *ngFor="let studentDetails of student">
+                                            <td>{{studentDetails.id}}</td>
+                                            <td>{{studentDetails.userName}}</td>
+                                            <td>{{studentDetails.emailId}}</td>
+                                            <td>{{studentDetails.mobileNo}}</td>
+                                            <td>{{studentDetails.role}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="admin_outer form-style">
+                    <div class="st_info">
+                        <div class="row">
+                            <p>Subscribers Details:</p>
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Id</th>
+                                            <th>UserName</th>
+                                            <th>EmailId</th>
+                                            <th>MobileNo</th>
+                                            <th>Role</th>                                           
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- <tr *ngIf="subscriber.length == 0">No record found.</tr> -->
+                                        <tr *ngFor="let subDetails of subscriber">
+                                            <td>{{subDetails.id}}</td>
+                                            <td>{{subDetails.userName}}</td>
+                                            <td>{{subDetails.emailId}}</td>
+                                            <td>{{subDetails.mobileNo}}</td>
+                                            <td>{{subDetails.role}}</td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="admin_outer form-style">
+                    <div class="st_info">
+                        <div class="row">
+                            <p>Student Application Details:</p>
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead>
@@ -17,19 +91,19 @@
                                             <th>Student Name</th>
                                             <th>Register No</th>
                                             <th>Education</th>
-                                            <th>Institute Name</th>      
-                                            <th>Course</th>                                         
-                                            <th>Department</th>   
-                                            <th>Mobile No</th> 
-                                            <th>EmailId</th> 
-                                            <th>User Id</th> 
-                                            <th>Bonafide</th> 
+                                            <th>Institute Name</th>
+                                            <th>Course</th>
+                                            <th>Department</th>
+                                            <th>Mobile No</th>
+                                            <th>EmailId</th>
+                                            <th>User Id</th>
+                                            <th>Bonafide</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr *ngIf="student.length == 0">No record found.</tr>
-                                        <tr *ngFor="let application of student">
+                                        <tr *ngIf="studentApplication.length == 0">No record found.</tr>
+                                        <tr *ngFor="let application of studentApplication">
                                             <td>{{application.id}}</td>
                                             <td>{{application.studentName}}</td>
                                             <td>{{application.registerNo}}</td>
@@ -39,26 +113,24 @@
                                             <td>{{application.department}}</td>
                                             <td>{{application.mobileNo}}</td>
                                             <td>{{application.emailId}}</td>
-                                            <td>{{application.userId}}</td>   
-                                            <td><a>sample</a></td>                                          
-                                            <td><a>View</a></td>                                            
+                                            <td>{{application.userId}}</td>
+                                            <td><a>sample</a></td>
+                                            <td><a>View</a></td>
                                         </tr>
-                                        
+
                                     </tbody>
                                 </table>
-                            </div>                               
-                        </div>                        
-                        
-                    </div>                    
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
-            
+
 
         </div>
-        
+
+
     </div>
 </div>
-
-
-

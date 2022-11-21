@@ -8,12 +8,13 @@ import com.nagas.backend.model.AttachedResponse;
 import com.nagas.backend.services.ApplicationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
+import org.springframework.core.io.Resource;
 import java.util.List;
 @CrossOrigin(origins = "http://localhost:4200")
 @Slf4j
@@ -30,22 +31,7 @@ public class ApplicationController {
         log.info("Entering the saveApplication method:"+request.getStudentName());
         String save = null;
         try{
-//            ObjectMapper objectMapper = new ObjectMapper();
-           // request = objectMapper.readValue(request,ApplicationRequest.class);
-            List<ApplicationAttachment> fileList = new ArrayList<ApplicationAttachment>();
-//            MultipartFile file = request.getBonafide();
-//                ApplicationAttachment attachment = new ApplicationAttachment();
-//                String fileContentType = file.getContentType();
-//                String sourceFileContent = new String(file.getBytes());
-//                String fileName = file.getOriginalFilename();
-//               // FileModal fileModal = new FileModal(fileName, sourceFileContent, fileContentType);
-//                attachment.setFileName(fileName);
-//                attachment.setContent(file.getBytes());
-//                attachment.setFileType(fileContentType);
-//                // Adding file into fileList
-//                fileList.add(attachment);
-
-            save   = service.saveApplication(request,fileList);
+            save   = service.saveApplication(request);
         }catch(Exception e){
             log.info("Exception in saveApplication:"+e);
         }
@@ -90,5 +76,21 @@ public class ApplicationController {
         }
         log.info("Leaving the getAllStudentDetails methods");
         return response;
+    }
+
+    @PostMapping("/application/uploadImage/{userId}")
+    public String handleFileUpload(@PathVariable int userId , @RequestParam("file") MultipartFile file) {
+        return service.store(file, userId);
+    }
+
+    @GetMapping("/application/downloadFile/{fileId}")
+    public ResponseEntity<Resource> downloadFile(@PathVariable int fileId) {
+        // Load file from database
+        ApplicationAttachment dbFile = service.getFile(fileId);
+
+        return ResponseEntity.ok()
+                .contentType(MediaType.parseMediaType(dbFile.getFileType()))
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + dbFile.getFileName() + "\"")
+                .body(new ByteArrayResource(dbFile.getContent()));
     }
 }

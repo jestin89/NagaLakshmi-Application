@@ -2,21 +2,22 @@ package com.nagas.backend.services;
 
 import com.nagas.backend.entity.EmailTemplate;
 import com.nagas.backend.entity.UserRegister;
+import com.nagas.backend.model.AdminResponse;
 import com.nagas.backend.model.LoginRequest;
 import com.nagas.backend.model.LoginResponse;
 import com.nagas.backend.model.Register;
 import com.nagas.backend.repository.EmailTemplateRepository;
 import com.nagas.backend.repository.RegisterRepository;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
+import java.util.*;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.multipart.MultipartFile;
 
 
 @Slf4j
@@ -30,7 +31,6 @@ public class RegisterService {
 
     @Autowired
     private EmailService emailService;
-
 
 
     public Register saveUserRegister(Register register) {
@@ -124,6 +124,52 @@ public class RegisterService {
         }
 
         log.info("Leaving the validate method");
+        return response;
+    }
+
+    public AdminResponse getAll() {
+        AdminResponse response = new AdminResponse();
+        log.info("Entering the getAll service method");
+        try {
+            List<UserRegister> register = registerRepository.findAll();
+            response = convertToAdmin(register);
+        } catch (Exception e) {
+            log.info("Exception in getAll service method");
+        }
+        log.info("Leaving the getAll service method");
+        return response;
+    }
+
+    private AdminResponse convertToAdmin(List<UserRegister> register) {
+        AdminResponse response = new AdminResponse();
+        List<Register> student = new ArrayList<>();
+        List<Register> subscriber = new ArrayList<>();
+        try {
+            if (!CollectionUtils.isEmpty(register)) {
+                register.stream().filter(s -> s.getRole().equalsIgnoreCase("Student")).forEach(stu -> {
+                    Register studentRegister = new Register();
+                    studentRegister.setId(stu.getId());
+                    studentRegister.setUserName(stu.getUserName());
+                    studentRegister.setEmailId(stu.getEmailId());
+                    studentRegister.setMobileNo(stu.getMobileNo());
+                    studentRegister.setRole(stu.getRole());
+                    student.add(studentRegister);
+                });
+                response.setStudent(student);
+                register.stream().filter(s -> s.getRole().equalsIgnoreCase("Subscriber")).forEach(sub -> {
+                    Register subRegister = new Register();
+                    subRegister.setId(sub.getId());
+                    subRegister.setUserName(sub.getUserName());
+                    subRegister.setEmailId(sub.getEmailId());
+                    subRegister.setMobileNo(sub.getMobileNo());
+                    subRegister.setRole(sub.getRole());
+                    subscriber.add(subRegister);
+                });
+                response.setSubscriber(subscriber);
+            }
+        }catch(Exception e){
+            log.info("Exception in convert to admin method:"+e.getMessage());
+        }
         return response;
     }
 }

@@ -12,8 +12,8 @@ import { StudentApplicationService } from 'src/app/services/student-application.
 export class StudentApplicationComponent implements OnInit {
   studentForm: FormGroup;
   submitted = false;
-  selectedFiles?: FileList;
-  currentFile?: File;
+  selectedFiles: FileList;  
+  currentFileUpload: File;  
   request = new ApplicationRequest();
   sub: any;
   id: number;
@@ -48,31 +48,36 @@ export class StudentApplicationComponent implements OnInit {
     });
   }
 
-  // selectFile(event: any): void {
-  //   this.selectedFiles = event.target.files;
-  // }
+  selectFile(event) {  
+    this.selectedFiles = event.target.files;  
+  }
 
-  saveStudentApplication() {
-    // if (this.selectedFiles) {
-    //   const file: File | null = this.selectedFiles.item(0);
-
-    //   if (file) {
-    //     this.currentFile = file;
-    //     const formData: FormData = new FormData();
-    //     formData.append('file', file);
-    //     this.request.bonafide = formData;
-    //   }
-    // }
+  saveStudentApplication() {    
     this.submitted = true;
     if (this.studentForm.valid) {
       this.request = this.studentForm.value;
       console.log('the request:', this.request);
-
       console.log('studentForm:', this.studentForm.value);
-      this.service.register(this.studentForm.value).subscribe((data: any) => {
+      
+      this.service.register(this.studentForm.value).subscribe((data: string) => {
         console.log('Response:', data);
+
         if (data) {
-          this.router.navigateByUrl(`/studentDashboard/${this.id}`);
+          if(this.selectedFiles != null)  {
+            this.currentFileUpload = this.selectedFiles.item(0);
+            console.log('currentFileUpload:',this.currentFileUpload);  
+            this.service.uploadFile( this.currentFileUpload,this.id).subscribe((response:any)=>{
+              console.log('Upload Response:',response);
+              if(response){
+
+              }
+            },
+            (error)=>{
+
+            });
+          }
+         
+          this.router.navigateByUrl(`/home/studentDashboard/${this.id}`);
         }
       }, (error) => {
         console.log('Error:', error);

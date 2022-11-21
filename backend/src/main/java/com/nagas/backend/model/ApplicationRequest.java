@@ -15,5 +15,5 @@ public class ApplicationRequest {
     private int mobileNo;
     private String emailId;
     private int userId;
-   // private MultipartFile bonafide;
+ private AttachedResponse bonafide;
 }

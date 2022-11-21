@@ -1,3 +1,5 @@
+import { LoginResponse } from "./loginResponse";
+
 export class ApplicationRequest {
     id: number;
     studentName: string;
@@ -7,7 +9,14 @@ export class ApplicationRequest {
     course: string;
     department: string;
     mobileNo: number;
-    emailId: string;    
+    emailId: string;
     userId: number;
-    bonafide: FormData;
+    bonafide: AttachedResponse;
+}
+export class AttachedResponse {
+    id: number;
+    fileName: string;
+    content: any;
+    fileType: string;
+    register: LoginResponse;
 }

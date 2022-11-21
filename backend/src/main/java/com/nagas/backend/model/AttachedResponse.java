@@ -11,4 +11,5 @@ public class AttachedResponse {
     private String fileName;
     private byte[] content;
     private String fileType;
+    private Register register;
 }

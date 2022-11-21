@@ -15,6 +15,7 @@ export class SubscriberDashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getAllStudentDetails().subscribe((response: Application[]) => {
+      console.log('REEEE:',response);
       if (response) {
         this.student = response;
       }

@@ -14,3 +14,4 @@ export class Application {
     emailId: string;
     userId:number;
 }
+

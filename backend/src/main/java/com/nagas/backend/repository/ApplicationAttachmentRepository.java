@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface ApplicationAttachmentRepository extends JpaRepository<ApplicationAttachment, Integer> {
 
-    List<AttachedResponse> findByApplicationId(int id);
+
+    ApplicationAttachment findByUserId(int userId);
 }

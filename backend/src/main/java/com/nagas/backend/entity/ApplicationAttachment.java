@@ -17,14 +17,15 @@ public class ApplicationAttachment {
     @Column(name = "name")
     private String fileName;
 
-    @Lob
+//    @Lob
     @Column(name = "content")
     private byte[] content;
 
     @Column(name = "filetype")
     private String fileType;
 
-    @ManyToOne
-    private Application application;
+    @OneToOne
+    private UserRegister user;
+
 
 }

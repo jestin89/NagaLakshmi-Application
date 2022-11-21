@@ -42,7 +42,7 @@
                                             <td>{{application.mobileNo}}</td>
                                             <td>{{application.emailId}}</td>
                                             <td>{{application.userId}}</td>
-                                            <td><a>sample</a></td>
+                                            <td><a (click)="downloadFile(application.bonafide)">{{application.bonafide.fileName}}</a></td>
                                             <td><a>View</a></td>
                                         </tr>
                                     </tbody>

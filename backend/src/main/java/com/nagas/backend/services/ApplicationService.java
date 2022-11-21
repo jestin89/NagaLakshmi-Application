@@ -10,11 +10,14 @@ import com.nagas.backend.repository.ApplicationRepository;
 import com.nagas.backend.repository.EmailTemplateRepository;
 import com.nagas.backend.repository.RegisterRepository;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.*;
 
 @Slf4j
@@ -39,23 +42,15 @@ public class ApplicationService {
     private EmailService emailService;
 
 
-    public String saveApplication(ApplicationRequest request, List<ApplicationAttachment> fileList) {
+    public String saveApplication(ApplicationRequest request) {
         log.info("Entering the ApplicationService save method");
         String save = null;
         try {
             Optional<UserRegister> user = registerRepository.findById(request.getUserId());
             if (user.isPresent()) {
-
                 Application application = convertToEntity(request, user.get());
                 Application response = applicationRepository.save(application);
-//                if (response != null) {
-//
-//                    for (ApplicationAttachment fileModal : fileList) {
-//                        fileModal.setApplication(response);
-//                        applicationAttachmentRepository.save(fileModal);
-//                    }
-//                }
-                save = "Application Saved Successfully.";
+                save = "Application saved successfully.";
                 sendMailToSubscribers(response);
             }
 
@@ -90,11 +85,6 @@ public class ApplicationService {
             }
         }
     }
-
-//    private ApplicationRequest convertToDTOApplicationRequest(Application save) {
-//        ApplicationRequest response = modelMapper.map(save, ApplicationRequest.class);
-//        return response;
-//    }
 
 
     public String updateApplication(ApplicationRequest request) {
@@ -132,11 +122,21 @@ public class ApplicationService {
     public ApplicationResponse getApplication(Integer id) {
         ApplicationResponse response = new ApplicationResponse();
         ApplicationRequest application = convertToDTO(applicationRepository.findByUserId(id));
-        //List<AttachedResponse> attached = applicationAttachmentRepository.findByApplicationId(application.getId());
+
+        AttachedResponse attached = convertToApplicationAttachment(applicationAttachmentRepository.findByUserId(application.getUserId()));
+        application.setBonafide(attached);
         response.setRequest(application);
         return response;
     }
 
+    private AttachedResponse convertToApplicationAttachment(ApplicationAttachment application) {
+        AttachedResponse response = new AttachedResponse();
+        if (application != null) {
+            response.setId(application.getId());
+            response.setFileName(application.getFileName());
+        }
+        return response;
+    }
 
     public List<ApplicationRequest> getAllApplication() {
         List<ApplicationRequest> response = null;
@@ -150,6 +150,8 @@ public class ApplicationService {
         List<ApplicationRequest> app = new ArrayList<>();
 
         application.stream().forEach(s -> {
+
+
             ApplicationRequest response = new ApplicationRequest();
             response.setId(s.getId());
             response.setDepartment(s.getDepartment());
@@ -161,8 +163,48 @@ public class ApplicationService {
             response.setRegisterNo(s.getRegisterNo());
             response.setInstituteName(s.getInstituteName());
             response.setStudentName(s.getStudentName());
+            //need to change
+            AttachedResponse attached = convertToApplicationAttachment(applicationAttachmentRepository.findByUserId(s.getUser().getId()));
+            response.setBonafide(attached);
             app.add(response);
         });
         return app;
     }
+
+    public String store(MultipartFile file, int userId) {
+        log.info("Entering the ApplicationService store method");
+        String save = null;
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        System.err.println("Filename:" + fileName);
+        try {
+            if (fileName != null) {
+                // throw new FileStorageException("Sorry! Filename contains invalid path sequence " + fileName);
+                Optional<UserRegister> user = registerRepository.findById(userId);
+                if (user.isPresent()) {
+                    ApplicationAttachment attachement = convertToAttachment(fileName, file, user.get());
+                    applicationAttachmentRepository.save(attachement);
+                }
+            }
+            save = "File uploaded successfully.";
+        } catch (Exception e) {
+            log.info("Exception in ApplicationService store method");
+        }
+        log.info("Leaving the ApplicationService store method");
+        return save;
+    }
+
+    private ApplicationAttachment convertToAttachment(String fileName, MultipartFile file, UserRegister userRegister) throws IOException {
+        ApplicationAttachment attachment = new ApplicationAttachment();
+        attachment.setFileName(fileName);
+        attachment.setFileType(file.getContentType());
+        attachment.setContent(file.getBytes());
+        attachment.setUser(userRegister);
+        return attachment;
+    }
+
+    public ApplicationAttachment getFile(int fileId) {
+        return applicationAttachmentRepository.findById(fileId).get();
+    }
 }
+
+
